@@ -14,7 +14,7 @@ const InputGroupText = props => {
 InputGroupText.propTypes = {
   className: PropTypes.string,
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  type: PropTypes.oneOf(INPUT_GROUP_ADDON_TYPES).isRequired,
+  type: PropTypes.oneOf(INPUT_GROUP_ADDON_TYPES),
 };
 
 InputGroupText.defaultProps = {

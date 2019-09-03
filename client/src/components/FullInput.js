@@ -4,6 +4,7 @@ import {
   InputGroupAddon,
   InputGroupText
 } from "../subcomponents/InputGroup";
+import { capitalize } from "../utils";
 
 export const FullInput = props => {
   const handleChange = e => props.onChange(e.target.value);
@@ -20,13 +21,12 @@ export const FullInput = props => {
     </select>
   );
 
-  const title = props.title.charAt(0).toUpperCase() + props.title.slice(1);
   return (
     <>
       <div className="form-group">
         <InputGroup className="mb-2">
           <InputGroupAddon type="prepend">
-            <InputGroupText type="prepend">{title}</InputGroupText>
+            <InputGroupText type="prepend">{capitalize(props.title)}</InputGroupText>
           </InputGroupAddon>
           {props.children}
           <InputGroupAddon type="append">

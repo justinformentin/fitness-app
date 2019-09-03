@@ -1,7 +1,14 @@
 import React from "react";
 import { FullInput } from "../components/FullInput";
-import { FormContainer, FormWrap, FormItemTitle } from "../styles";
-
+import {
+  FormContainer,
+  FormWrap,
+  FormItemTitle,
+  RadioContainer,
+  RadioGroup
+} from "../styles";
+import { RadioButton } from "../components/RadioButton";
+import InputGroupText from "../subcomponents/InputGroup/InputGroupText";
 export const PersonalDetails = props => {
   const heightUnits = [
     {
@@ -36,6 +43,7 @@ export const PersonalDetails = props => {
       (props.formState.validity[key] === false ? " invalid" : "")
     );
   };
+
   const handleHeightUnit = e => props.heightUnit(e);
 
   const handleWeightUnit = e => props.weightUnit(e);
@@ -55,9 +63,8 @@ export const PersonalDetails = props => {
     const handleChange =
       formItem === "height" ? handleHeightUnit : handleWeightUnit;
     return (
-      <div className="form-input-container">
+      <div className="form-input-container" key={idx}>
         <FullInput
-          key={idx}
           title={formItem}
           unitList={unitList ? unitList : null}
           unit={unit}
@@ -79,7 +86,22 @@ export const PersonalDetails = props => {
     );
   };
 
+  const selectRadio = v => props.insertFormItem("gender", v);
+
+  const renderRadio = (radioItem, idx) => (
+    <RadioButton
+      key={idx}
+      name="fruit"
+      checked={props.formState.values.gender === radioItem}
+      onChange={() => selectRadio(radioItem)}
+    >
+      {radioItem}
+    </RadioButton>
+  );
+
   const formValues = ["height", "weight", "age"];
+  const radioValues = ["male", "female", "other"];
+
   return (
     <FormContainer showing={props.showing}>
       <FormItemTitle>
@@ -90,6 +112,12 @@ export const PersonalDetails = props => {
       </FormItemTitle>
       <FormWrap>
         {formValues.map((formItem, idx) => renderInput(formItem, idx))}
+        <RadioGroup>
+          <InputGroupText className="single-text">Gender</InputGroupText>
+          <RadioContainer>
+            {radioValues.map((radioItem, idx) => renderRadio(radioItem, idx))}
+          </RadioContainer>
+        </RadioGroup>
       </FormWrap>
     </FormContainer>
   );

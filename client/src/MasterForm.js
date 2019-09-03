@@ -12,22 +12,24 @@ const MasterForm = () => {
   const [hUnit, setHeightUnit] = useState("inches");
   const [wUnit, setWeightUnit] = useState("pounds");
   const [form, setForm] = useState({
-    mainChoice: "",
+    age: "",
+    dietRestrictions: [],
+    gender: "",
     height: {
       value: "",
       unit: hUnit
     },
+    mainChoice: "",
     weight: {
       value: "",
       unit: wUnit
-    },
-    age: "",
-    dietRestrictions: []
+    }
   });
 
-  const [formState, { number }] = useFormState();
+  const [formState, { number, radio }] = useFormState();
 
   console.log("FORM", form);
+  console.log("FORMSTATE", formState);
 
   useEffect(() => {
     setShowing(true);
@@ -37,17 +39,18 @@ const MasterForm = () => {
 
   const submitForm = () => {
     setForm({
-      mainChoice: formState.values.mainChoice,
+      age: formState.values.age,
+      dietRestrictions: formState.values.dietRestrictions,
+      gender: formState.values.gender,
       height: {
         value: formState.values.height,
         unit: hUnit
       },
+      mainChoice: formState.values.mainChoice,
       weight: {
         value: formState.values.weight,
         unit: wUnit
-      },
-      age: formState.values.age,
-      dietRestrictions: formState.values.dietRestrictions
+      }
     });
   };
 
@@ -56,12 +59,12 @@ const MasterForm = () => {
   const prevStep = () => step > 1 && setStep(step - 1);
 
   const getDisabled = () => {
-    const { mainChoice, weight, height, age } = formState.values;
+    const { age, gender, height, mainChoice, weight} = formState.values;
 
     const checkVal = step =>
       ({
         1: mainChoice ? false : true,
-        2: height && weight && age ? false : true,
+        2: age && gender && height && weight ? false : true,
         3: false,
         4: false
       }[step]);
@@ -112,9 +115,11 @@ const MasterForm = () => {
           currentStep={step}
           formState={formState}
           number={number}
+          radio={radio}
           heightUnit={setHeightUnit}
           weightUnit={setWeightUnit}
           showing={showing}
+          insertFormItem={insertFormItem}
         />
         <DietStep
           currentStep={step}

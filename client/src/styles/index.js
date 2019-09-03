@@ -74,3 +74,83 @@ export const Button = styled.button`
     outline: ${props => (props.disabled ? "" : "0")};
   }
 `;
+
+export const RadioContainer = styled.div`
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+export const RadioGroup = styled.div`
+  display: flex;
+`;
+export const RadioItem = styled.label`
+margin-bottom: .5rem;
+position: relative;
+display: block;
+min-height: 1.5rem;
+padding-left: 1.5rem;
+min-height: 1.5rem;
+padding-left: 1.688rem;
+&:hover {
+  cursor: pointer;
+}
+input{
+   position: absolute;
+   z-index: -1;
+   opacity: 0;
+   overflow: visible;
+   margin: 0;
+}
+label{
+  position: static;
+  margin-bottom: 0;
+  display: inline-block;
+  &::before{
+    border-radius: 50%;
+    pointer-events: all;
+    border-radius: 50%;
+    top: .1875rem;
+    left: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    background-color: #fff;
+    border: 1px solid #becad6;
+    transition: all 250ms cubic-bezier(.27,.01,.38,1.06);
+    box-shadow: none;
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    content: "";
+    user-select: none;
+  }
+  &::after{
+    content: '';
+    border-radius: 50%;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    background-image: none!important;
+    position: absolute;
+    background: #fff;
+    width: 8px;
+    height: 8px;
+    top: 8px;
+    left: 5px;
+    transition: all 250ms cubic-bezier(.27,.01,.38,1.06);
+    transition-delay: .1s;
+    opacity: 0;
+    transform: scale(0);
+    top: .1875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    background-size: 50% 50%;
+    position: absolute;
+    left: -1.5rem;
+    display: block;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+`;
