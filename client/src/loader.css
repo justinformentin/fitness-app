@@ -1,0 +1,66 @@
+/*!
+ * loader
+ * http://lab.hakim.se/loader
+ * MIT licensed
+ *
+ * Copyright (C) 2016 Hakim El Hattab, http://hakim.se
+ */
+.loader-button {
+  position: relative;
+}
+.loader-button .loader-spinner {
+  position: absolute;
+  z-index: 2;
+  display: inline-block;
+  width: 32px;
+  top: 50%;
+  margin-top: 0;
+  opacity: 1;
+  pointer-events: none;
+}
+.loader-button .loader-label {
+  position: relative;
+  z-index: 3;
+}
+.loader-button .loader-progress {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: 0.1s linear all !important;
+  -moz-transition: 0.1s linear all !important;
+  -ms-transition: 0.1s linear all !important;
+  -o-transition: 0.1s linear all !important;
+  transition: 0.1s linear all !important;
+}
+.loader-button .loading  .loader-progress {
+  opacity: 1;
+  visibility: visible;
+}
+.loader-button,
+.loader-button .loader-spinner,
+.loader-button .loader-label {
+  -webkit-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all !important;
+  -moz-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all !important;
+  -ms-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all !important;
+  -o-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all !important;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all !important;
+}
+
+.loader-button .expand-right .loader-spinner {
+  right: -6px;
+}
+.loader-button .expand-right[data-size="s"] .loader-spinner,
+.loader-button .expand-right[data-size="xs"] .loader-spinner {
+  right: -12px;
+}
+.loader-button .expand-right .loading {
+  padding-right: 56px;
+}
+.loader-button .expand-right .loading .loader-spinner {
+  opacity: 1;
+}

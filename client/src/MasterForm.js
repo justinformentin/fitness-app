@@ -3,6 +3,9 @@ import { MainChoiceStep, PersonalDetails, DietStep, Step4 } from "./steps";
 import { useFormState } from "react-use-form-state";
 import { Progress } from "./subcomponents/Progress";
 import { StepContainer, ButtonContainer, Button } from "./styles";
+import "./styles.css";
+import LoaderButton from "./LoaderButton";
+// import './loader.css'
 
 const MasterForm = () => {
   const maxSteps = 4;
@@ -59,7 +62,7 @@ const MasterForm = () => {
   const prevStep = () => step > 1 && setStep(step - 1);
 
   const getDisabled = () => {
-    const { age, gender, height, mainChoice, weight} = formState.values;
+    const { age, gender, height, mainChoice, weight } = formState.values;
 
     const checkVal = step =>
       ({
@@ -102,10 +105,55 @@ const MasterForm = () => {
     </Button>
   );
 
+  const [loading, setLoading] = useState(null);
+  const [percent, setPercent] = useState(0);
+
+  const loadButton = () => {
+    setLoading(true);
+    setTimeout(countUp, 250);
+  };
+
+  const countUp = () => {
+    doTimer(
+      5000,
+      20,
+      (count) => setPercent(count),
+      () => {setLoading(false); setPercent(0)}
+    );
+  };
+
+  const doTimer = (length, resolution, oninstance, oncomplete) => {
+    var steps = (length / 100) * (resolution / 10),
+      speed = length / steps,
+      count = 0,
+      start = new Date().getTime();
+
+    function instance() {
+      if (count++ == steps) {
+        oncomplete(count);
+      } else {
+        oninstance(count);
+        var diff = new Date().getTime() - start - count * speed;
+        window.setTimeout(instance, speed - diff);
+      }
+    }
+
+    window.setTimeout(instance, speed);
+  };
+
+  // const getClass = cn => cn + (loading ? ' loading' : '')
+
   return (
     <>
       <Progress value={step - 1} max={maxSteps - 1}></Progress>
       <StepContainer>
+        <LoaderButton
+          isLoading={loading}
+          onClick={loadButton}
+          percent={percent}
+        >
+          Click me!
+        </LoaderButton>
         <MainChoiceStep
           currentStep={step}
           handleMainChoice={v => insertFormItem("mainChoice", v)}

@@ -10,9 +10,10 @@ const fs = require("fs");
 const APP_ID = 'eb223bb5'
 const APP_KEY = 'a2fa4489c73af81ce3ac80a35b5dafe9'
 
-const QUERY = 'pork'
+const QUERY = 'soy'
 const append = '&to=100'
 const healthLabel = '&health=alcohol-free&health=sugar-conscious'
+const cuisineType = '&cuisineType=chinese'
 // const dishType = '&dishType=main-course&dishType=salad&dishType=sandwich&dishType=side-dish&dishType=starter'
 const dishType = '&dishType=main-course&dishType=side-dish&dishType=starter'
 // const mealType = '&mealType=breakfast&mealType=lunch&mealType=dinner&mealType=snack'
@@ -26,7 +27,7 @@ axios(endpoint + healthLabel + append)
 
 const storeData = (data, path) => {
   try {
-    fs.writeFileSync("pork.json", CircularJSON.stringify(data));
+    fs.writeFileSync("soyraw.json", CircularJSON.stringify(data));
   } catch (err) {
     console.error(err);
   }
